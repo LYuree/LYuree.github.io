@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
-import NavBar from './components/NavBar/Navbar';
+import NavBar from './components/NavBar/NavBar';
 import HomePage from './components/HomePage/HomePage';
 import AboutPage from './components/AboutPage/AboutPage';
 import PageNotFound from './components/PageNotFound/PageNotFound';
@@ -12,6 +12,7 @@ function App() {
 
   return (
     <>
+    <div>Hey there!</div>
       <div className="app">
                 <ScrollToTop/>
                 <NavBar/>
