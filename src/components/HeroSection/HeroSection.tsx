@@ -29,7 +29,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: 'cover', // Изображение покрывает всю область
         backgroundPosition: 'center', // Центрирование изображения
+        borderRadius: '8px'
       }}
+      mb={6}
     >
       {/* Затемнение фона для улучшения читаемости текста */}
       <Box
@@ -40,6 +42,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           right: 0,
           bottom: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.5)', // Полупрозрачный черный фон
+          borderRadius: '8px'
         }}
       />
 
@@ -53,7 +56,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         </Typography>
         <Button
           variant="contained"
-          color="primary"
+          color="secondary"
           size="large"
           onClick={onButtonClick}
         >

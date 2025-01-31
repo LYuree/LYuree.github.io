@@ -6,8 +6,12 @@ import DownloadPriceForm from "../DownloadPriceForm/DownloadPriceForm";
 import ContentList from "../ContentList/ContentList";
 import HeroSection from "../HeroSection/HeroSection";
 const HomePage: React.FC = () => {
-    const handleButtonClick = () => {
+    const handleButtonClick = (scrollHeight: number) => {
         console.log('Button clicked!');
+        window.scrollBy({
+            top: scrollHeight, // Прокрутка на 768px вниз
+            behavior: 'smooth', // Плавная прокрутка
+          });
         // Add your button click logic here
     };
 
@@ -23,11 +27,11 @@ const HomePage: React.FC = () => {
             title=""
             content={[
                 <HeroSection
-                title="Тест на профориентацию"
-                description="Lorem Ipsum..."
-                buttonText="Начать"
+                title="Выберите профессию с нами!"
+                description=""
+                buttonText="подробнее"
                 imageUrl="/src/images/collage-different-photos-concept-different-occupation.jpg" // Замените на URL вашего изображения
-                onButtonClick={handleButtonClick}
+                onButtonClick={() => handleButtonClick(400)}
                 />,
               "На нашем сайте вы можете пройти комплексное онлайн тестирование, направленное на определение ваших профессиональных предпочтений. Тест будет интересен школьникам и студентам, он поможет в дальнейшем выборе профессии.",
               "Наш тест основывается на проверенных методиках, но вместе с этим исследует предпочтения к современным профессиям и направлениям - менеджмент, IT, фриланс и т.д.",
@@ -43,8 +47,8 @@ const HomePage: React.FC = () => {
               </ListItem>
             </ContentList>,
             <Box my={4} display="flex" justifyContent="center">
-                <Button variant="contained" color="primary" onClick={handleButtonClick}>
-                    ПОДРОБНЕЕ
+                <Button variant="contained" color="primary" onClick={() => handleButtonClick(610)}>
+                читать далее
                 </Button>
             </Box>
             ]}
