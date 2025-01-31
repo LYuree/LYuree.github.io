@@ -8,7 +8,7 @@ interface ContentSectionProps {
 
 const ContentSection: React.FC<ContentSectionProps> = ({ title, content }) => {
   return (
-    <Box sx={{ p: 3, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
+    <Box sx={{ p: 10, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
       <Typography variant="h4" gutterBottom>
         {title}
       </Typography>

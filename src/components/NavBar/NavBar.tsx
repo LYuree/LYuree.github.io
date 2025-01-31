@@ -1,11 +1,18 @@
-import { AppBar, Toolbar, Typography, Button, Box, useMediaQuery } from '@mui/material';
-import { Theme } from '@mui/material/styles';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { theme } from '../../theme';
-
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+  useMediaQuery,
+} from "@mui/material";
+import { Theme } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
 
   return (
     <AppBar position="static" color="primary">
@@ -13,13 +20,17 @@ const NavBar = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Профориентация
         </Typography>
-        
+
         {!isMobile && (
           <Box>
-            <Button color="inherit" href="/">Главная</Button>
-            <Button color="inherit" href="/metod">Методика</Button>
-            <Button color="secondary" href="/test" variant="contained">
-              Начать тест
+            <Button color="inherit">
+              <Link to="/">Главная</Link>
+            </Button>
+            <Button color="inherit">
+              <Link to="/method">Методика</Link>
+            </Button>
+            <Button color="secondary" variant="contained">
+              <Link to="/test">Начать тест</Link>
             </Button>
           </Box>
         )}
@@ -28,16 +39,4 @@ const NavBar = () => {
   );
 };
 
-// const NavBar = () => {
-//     return (
-//         <nav>
-//             <ul>
-//                 <li>nav1</li>
-//                 <li>nav2</li>
-//                 <li>nav3</li>
-//             </ul>
-//         </nav>
-//     )
-// }
- 
 export default NavBar;

@@ -1,0 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[data-name="homepage-content"] > * {
+    margin: 2rem 0;
+}
