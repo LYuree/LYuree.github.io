@@ -6,13 +6,22 @@ import DownloadPriceForm from "../DownloadPriceForm/DownloadPriceForm";
 import ContentList from "../ContentList/ContentList";
 import HeroSection from "../HeroSection/HeroSection";
 const HomePage: React.FC = () => {
-    const handleButtonClick = (scrollHeight: number) => {
-        console.log('Button clicked!');
-        window.scrollBy({
-            top: scrollHeight, // Прокрутка на 768px вниз
-            behavior: 'smooth', // Плавная прокрутка
-          });
-        // Add your button click logic here
+    const handleButtonClick = (scrollToDataName: string) => {
+        // console.log('Button clicked!');
+        // window.scrollBy({
+        //     top: scrollHeight, // Прокрутка на 768px вниз
+        //     behavior: 'smooth', // Плавная прокрутка
+        //   });
+        if (scrollToDataName) {
+            const element = document.querySelector(`[data-name="${scrollToDataName}"]`);
+            if (element) {
+              element.scrollIntoView({
+                behavior: 'smooth', // Плавная прокрутка
+                block: 'start', // Прокрутка до верхней границы элемента
+              });
+            }
+          }
+        
     };
 
   return (
@@ -31,10 +40,10 @@ const HomePage: React.FC = () => {
                 description=""
                 buttonText="подробнее"
                 imageUrl="/src/images/collage-different-photos-concept-different-occupation.jpg" // Замените на URL вашего изображения
-                onButtonClick={() => handleButtonClick(400)}
+                onButtonClick={() => handleButtonClick("intro")}
                 />,
-              "На нашем сайте вы можете пройти комплексное онлайн тестирование, направленное на определение ваших профессиональных предпочтений. Тест будет интересен школьникам и студентам, он поможет в дальнейшем выборе профессии.",
-              "Наш тест основывается на проверенных методиках, но вместе с этим исследует предпочтения к современным профессиям и направлениям - менеджмент, IT, фриланс и т.д.",
+              <div data-name="intro">На нашем сайте вы можете пройти комплексное онлайн тестирование, направленное на определение ваших профессиональных предпочтений. Тест будет интересен школьникам и студентам, он поможет в дальнейшем выборе профессии.
+              Наш тест основывается на проверенных методиках, но вместе с этим исследует предпочтения к современным профессиям и направлениям - менеджмент, IT, фриланс и т.д.</div>,
               <ContentList key="list">
               <ListItem>
                 <ListItemText primary="• Дифференциально-диагностический опросник" />
@@ -47,7 +56,7 @@ const HomePage: React.FC = () => {
               </ListItem>
             </ContentList>,
             <Box my={4} display="flex" justifyContent="center">
-                <Button variant="contained" color="primary" onClick={() => handleButtonClick(610)}>
+                <Button variant="contained" color="primary" onClick={() => handleButtonClick("#")}>
                 читать далее
                 </Button>
             </Box>
