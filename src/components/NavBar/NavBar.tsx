@@ -30,7 +30,7 @@ const NavBar = () => {
               <Link to="/method">Методика</Link>
             </Button>
             <Button color="secondary" variant="contained">
-              <Link to="/test">Начать тест</Link>
+              <Link to="/test_init">Начать тест</Link>
             </Button>
           </Box>
         )}

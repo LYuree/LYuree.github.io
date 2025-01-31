@@ -28,8 +28,8 @@ const Footer = () => {
           
           <Box mb={2}>
             <Typography variant="h6">Ссылки</Typography>
-            <Link href="/metod" color="inherit">Методика</Link><br />
-            <Link href="/test" color="inherit">Тестирование</Link>
+            <Link href="/method" color="inherit">Методика</Link><br />
+            <Link href="/test_init" color="inherit">Тестирование</Link>
           </Box>
         </Box>
         

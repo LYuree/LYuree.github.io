@@ -7,3 +7,11 @@
 [data-name="homepage-content"] > * {
     margin: 2rem 0;
 }
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: white
+}
