@@ -14,7 +14,6 @@ function App() {
 
   return (
     <>
-    <div>Hey there!</div>
       <div className="app">
           <ThemeProvider theme={theme}>
                 <ScrollToTop/>
