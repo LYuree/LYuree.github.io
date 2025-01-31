@@ -4,6 +4,7 @@ import { theme } from "../../theme";
 import ContentSection from "../ContentSection/ContentSection";
 import DownloadPriceForm from "../DownloadPriceForm/DownloadPriceForm";
 import ContentList from "../ContentList/ContentList";
+import HeroSection from "../HeroSection/HeroSection";
 const HomePage: React.FC = () => {
     const handleButtonClick = () => {
         console.log('Button clicked!');
@@ -19,8 +20,15 @@ const HomePage: React.FC = () => {
 
         <Box my={8}>
           <ContentSection
-            title="Тест на профориентацию"
+            title=""
             content={[
+                <HeroSection
+                title="Тест на профориентацию"
+                description="Lorem Ipsum..."
+                buttonText="Начать"
+                imageUrl="/src/images/collage-different-photos-concept-different-occupation.jpg" // Замените на URL вашего изображения
+                onButtonClick={handleButtonClick}
+                />,
               "На нашем сайте вы можете пройти комплексное онлайн тестирование, направленное на определение ваших профессиональных предпочтений. Тест будет интересен школьникам и студентам, он поможет в дальнейшем выборе профессии.",
               "Наш тест основывается на проверенных методиках, но вместе с этим исследует предпочтения к современным профессиям и направлениям - менеджмент, IT, фриланс и т.д.",
               <ContentList key="list">
