@@ -5,6 +5,7 @@ import ContentSection from "../../components/ContentSection/ContentSection";
 import DownloadPriceForm from "../../components/DownloadPriceForm/DownloadPriceForm";
 import ContentList from "../../components/ContentList/ContentList";
 import HeroSection from "../../components/HeroSection/HeroSection";
+import image from "../../images/collage-different-photos-concept-different-occupation.jpg"
 const HomePage: React.FC = () => {
     const handleButtonClick = (scrollToDataName: string) => {
         if (scrollToDataName) {
@@ -32,7 +33,8 @@ const HomePage: React.FC = () => {
                 title="Выберите профессию с нами!🚀"
                 description=""
                 buttonText="подробнее"
-                imageUrl="/src/images/collage-different-photos-concept-different-occupation.jpg" // Замените на URL вашего изображения
+                // imageUrl="../../images/collage-different-photos-concept-different-occupation.jpg" // Замените на URL вашего изображения
+                imageUrl={image}
                 onButtonClick={() => handleButtonClick("intro")}
                 />,
               <div data-name="intro">На нашем сайте вы можете пройти комплексное онлайн тестирование, направленное на определение ваших профессиональных предпочтений. Тест будет интересен школьникам и студентам, он поможет в дальнейшем выборе профессии.
