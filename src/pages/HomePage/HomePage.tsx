@@ -5,7 +5,6 @@ import ContentSection from "../../components/ContentSection/ContentSection";
 import DownloadPriceForm from "../../components/DownloadPriceForm/DownloadPriceForm";
 import ContentList from "../../components/ContentList/ContentList";
 import HeroSection from "../../components/HeroSection/HeroSection";
-import { Link } from "react-router-dom";
 const HomePage: React.FC = () => {
     const handleButtonClick = (scrollToDataName: string) => {
         if (scrollToDataName) {
