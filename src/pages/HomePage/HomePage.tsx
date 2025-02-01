@@ -25,8 +25,6 @@ const HomePage: React.FC = () => {
       <CssBaseline />
 
       <Container maxWidth="md">
-        <Box my={8}>{/* <HeroSection /> */}</Box>
-
         <Box my={8}>
           <ContentSection
             title=""

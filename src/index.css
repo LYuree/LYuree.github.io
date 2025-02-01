@@ -16,6 +16,14 @@ a:visited {
     color: white;
 }
 
+[data-name="drawer-menu"] a:visited {
+    color: black;
+}
+
+.drawer-nav-menu {
+    font-weight: bold;
+}
+
 .report-abuse-link > span.report-abuse-link {
     color: revert;
 }

@@ -48,7 +48,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Контент */}
       <Box sx={{ position: 'relative', zIndex: 1, maxWidth: '800px', px: 2 }}>
-        <Typography variant="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h1" gutterBottom sx={{ fontWeight: 'bold' }}>
           {title}
         </Typography>
         <Typography variant="h5" gutterBottom sx={{ mb: 4 }}>
