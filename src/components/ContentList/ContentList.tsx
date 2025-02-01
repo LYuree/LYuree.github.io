@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ListItemText } from '@mui/material';
+import { List } from '@mui/material';
 
 interface ContentListProps {
   children: React.ReactNode; // Дочерние узлы для списка

@@ -1,10 +1,8 @@
 import { CssBaseline, Container, Box, Button, ListItemText, ListItem } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../theme";
 import ContentSection from "../../components/ContentSection/ContentSection";
-import DownloadPriceForm from "../../components/DownloadPriceForm/DownloadPriceForm";
 import ContentList from "../../components/ContentList/ContentList";
-import HeroSection from "../../components/HeroSection/HeroSection";
 import { Link } from "react-router-dom";
 const MethodPage: React.FC = () => {
     const handleButtonClick = (scrollToDataName: string) => {

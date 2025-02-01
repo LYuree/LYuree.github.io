@@ -1,24 +1,9 @@
-import { CssBaseline, Container, Box, Button, ListItemText, ListItem } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { CssBaseline, Container, Box, Button } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../../theme";
 import ContentSection from "../../../components/ContentSection/ContentSection";
-import DownloadPriceForm from "../../../components/DownloadPriceForm/DownloadPriceForm";
-import ContentList from "../../../components/ContentList/ContentList";
-import HeroSection from "../../../components/HeroSection/HeroSection";
 import { Link } from "react-router-dom";
 const InitialTest: React.FC = () => {
-    const handleButtonClick = (scrollToDataName: string) => {
-        if (scrollToDataName) {
-            const element = document.querySelector(`[data-name="${scrollToDataName}"]`);
-            if (element) {
-              element.scrollIntoView({
-                behavior: 'smooth', // Плавная прокрутка
-                block: 'start', // Прокрутка до верхней границы элемента
-              });
-            }
-          }
-        
-    };
 
   return (
     <ThemeProvider theme={theme}>

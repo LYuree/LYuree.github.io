@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Route, Routes } from "react-router-dom";
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import NavBar from './components/NavBar/NavBar';
