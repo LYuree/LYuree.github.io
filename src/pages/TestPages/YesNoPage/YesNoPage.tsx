@@ -213,7 +213,7 @@ const YesNoPage: React.FC = () => {
             color="primary"
             onClick={page === questions.length ? handleSubmit : undefined}
             sx={{
-              width: isMobile ? '100%' : 'auto',
+              // width: isMobile ? '100%' : 'auto',
               // visibility: page === questions.length ? 'visible' : 'hidden',
             }}
           >
