@@ -19,6 +19,7 @@ import {
   DialogContentText,
   DialogActions,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 interface Question {
   id: number;
@@ -191,18 +192,34 @@ const AlternativesPage: React.FC = () => {
             }}
           />
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
-            sx={{
-              width: isMobile ? '100%' : 'auto',
-              visibility: page === questions.length ? 'visible' : 'hidden',
-            }}
-          >
-            завершить
-          </Button>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4  }}>
+        <Link to="/test_part1">
+            <Button
+              variant="contained"
+              color="primary"
+              // onClick={handleSubmit}
+              sx={{
+                width: isMobile ? '100%' : 'auto',
+                visibility: page === 1 ? 'visible' : 'hidden',
+              }}
+            >
+              часть 1
+            </Button>
+          </Link>
+          <Link to={page === questions.length ? "/test_part3" : "#"}>
+            <Button
+              disabled={page !== questions.length}
+              variant="contained"
+              color="primary"
+              // onClick={handleSubmit}
+              sx={{
+                width: isMobile ? '100%' : 'auto',
+                // visibility: page === questions.length ? 'visible' : 'hidden',
+              }}
+            >
+              часть 3
+            </Button>
+          </Link>
         </Box>
       </Container>
     </ThemeProvider>

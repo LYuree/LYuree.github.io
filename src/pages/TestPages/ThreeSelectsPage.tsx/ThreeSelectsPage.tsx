@@ -21,6 +21,7 @@ import {
   DialogContentText,
   DialogActions,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 interface Question {
   id: number;
@@ -278,17 +279,19 @@ const ThreeSelectsPage: React.FC = () => {
           />
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
-            sx={{
-              width: isMobile ? '100%' : 'auto',
-              visibility: page === questions.length ? 'visible' : 'hidden',
-            }}
-          >
-            завершить
-          </Button>
+          <Link to="/test_part2">
+            <Button
+              variant="contained"
+              color="primary"
+              // onClick={handleSubmit}
+              sx={{
+                width: isMobile ? '100%' : 'auto',
+                visibility: page === questions.length ? 'visible' : 'hidden',
+              }}
+            >
+              часть 2
+            </Button>
+          </Link>
         </Box>
       </Container>
     </ThemeProvider>
