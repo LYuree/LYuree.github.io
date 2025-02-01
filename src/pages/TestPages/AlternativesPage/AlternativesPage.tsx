@@ -13,6 +13,11 @@ import {
   PaginationItem,
   ThemeProvider,
   CssBaseline,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from '@mui/material';
 
 interface Question {
@@ -34,6 +39,9 @@ const AlternativesPage: React.FC = () => {
 
   // State for selected answers (key: question ID, value: selected answer)
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: string }>({});
+
+  // State for controlling the popup
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(true);
 
   // Simulate fetching questions on component mount
   useEffect(() => {
@@ -85,93 +93,119 @@ const AlternativesPage: React.FC = () => {
     // Add your submit logic here
   };
 
+  // Handle popup close
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
     <ThemeProvider theme={theme}>
-    <CssBaseline />
-    <Container maxWidth="md" sx={{pt: '4rem', pb: '2rem'}}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Career Guidance
-      </Typography>
-      {currentQuestion && (
-        <>
-          <Typography variant="h6" align="center" gutterBottom>
-            {currentQuestion.text}
-          </Typography>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 4,
-            }}
-          >
-            <RadioGroup
-              value={selectedAnswers[currentQuestion.id] || ''} // Use the saved answer for the current question
-              onChange={handleAnswerChange}
-              sx={{ width: '100%', maxWidth: 400 }}
-            >
-              <FormControlLabel
-                value="option1"
-                control={<Radio />}
-                label={currentQuestion.option1}
-                sx={{ marginBottom: 2 }}
-              />
-              <FormControlLabel
-                value="option2"
-                control={<Radio />}
-                label={currentQuestion.option2}
-              />
-            </RadioGroup>
-          </Box>
-        </>
-      )}
-      <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 4 }}>
-        <Pagination
-          count={questions.length}
-          page={page}
-          onChange={handlePageChange}
-          renderItem={(item) => {
-            // Check if item is null or undefined
-            if (!item) {
-              return null; // Return nothing if item is null
-            }
+      <CssBaseline />
+      <Container maxWidth="md" sx={{ pt: '4rem', pb: '2rem' }}>
+        {/* Popup Dialog */}
+        <Dialog
+          open={isPopupOpen}
+          onClose={handlePopupClose}
+          aria-labelledby="popup-title"
+          aria-describedby="popup-description"
+        >
+          <DialogTitle id="popup-title" sx={{ fontWeight: 'bold' }}>
+            Добро пожаловать!
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="popup-description">
+              Этот тест поможет вам определить ваши профессиональные предпочтения. Пожалуйста, ответьте на все вопросы честно и внимательно. Удачи!
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handlePopupClose} color="primary" variant="contained">
+              Закрыть
+            </Button>
+          </DialogActions>
+        </Dialog>
 
-            return (
-              <PaginationItem
-                {...item}
-                sx={{
-                  ...(item.page && item.type === 'page' && {
-                    display:
-                      item.page === 1 ||
-                      item.page === page ||
-                      item.page === questions.length ||
-                      Math.abs(item.page - page) <= 1
-                        ? 'inline-flex'
-                        : 'none',
-                  }),
-                }}
-              />
-            );
-          }}
-        />
-      </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Button
+        <Typography variant="h4" align="center" gutterBottom>
+          Career Guidance
+        </Typography>
+        {currentQuestion && (
+          <>
+            <Typography variant="h6" align="center" gutterBottom>
+              {currentQuestion.text}
+            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: 4,
+              }}
+            >
+              <RadioGroup
+                value={selectedAnswers[currentQuestion.id] || ''} // Use the saved answer for the current question
+                onChange={handleAnswerChange}
+                sx={{ width: '100%', maxWidth: 400 }}
+              >
+                <FormControlLabel
+                  value="option1"
+                  control={<Radio />}
+                  label={currentQuestion.option1}
+                  sx={{ marginBottom: 2 }}
+                />
+                <FormControlLabel
+                  value="option2"
+                  control={<Radio />}
+                  label={currentQuestion.option2}
+                />
+              </RadioGroup>
+            </Box>
+          </>
+        )}
+        <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 4 }}>
+          <Pagination
+            count={questions.length}
+            page={page}
+            onChange={handlePageChange}
+            renderItem={(item) => {
+              // Check if item is null or undefined
+              if (!item) {
+                return null; // Return nothing if item is null
+              }
+
+              return (
+                <PaginationItem
+                  {...item}
+                  sx={{
+                    ...(item.page && item.type === 'page' && {
+                      display:
+                        item.page === 1 ||
+                        item.page === page ||
+                        item.page === questions.length ||
+                        Math.abs(item.page - page) <= 1
+                          ? 'inline-flex'
+                          : 'none',
+                    }),
+                  }}
+                />
+              );
+            }}
+          />
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
             variant="contained"
             color="primary"
             onClick={handleSubmit}
-            sx={{ 
+            sx={{
               width: isMobile ? '100%' : 'auto',
-              visibility: (page === questions.length) ? 'visible' : 'hidden'
+              visibility: page === questions.length ? 'visible' : 'hidden',
             }}
-            >
+          >
             завершить
-            </Button>
-      </Box>
-    </Container>
+          </Button>
+        </Box>
+      </Container>
     </ThemeProvider>
-
   );
 };
 

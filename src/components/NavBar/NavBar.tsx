@@ -84,6 +84,12 @@ const NavBar = () => {
               anchor="right"
               open={isDrawerOpen}
               onClose={toggleDrawer(false)}
+              PaperProps={{
+                sx: {
+                  borderTopLeftRadius: 8, // Rounded top-left corner
+                  borderBottomLeftRadius: 8, // Rounded bottom-left corner
+                },
+              }}
             >
               <Box
                 sx={{ width: 250 }}
@@ -94,10 +100,15 @@ const NavBar = () => {
                 <Box
                   sx={{
                     display: 'flex',
-                    justifyContent: 'flex-end',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
                     p: 2,
+                    width: '100%',
                   }}
                 >
+                  <Typography align="left" fontWeight="bold" variant="h5">
+                    Меню
+                  </Typography>
                   <IconButton onClick={toggleDrawer(false)}>
                     <CloseIcon />
                   </IconButton>
@@ -113,16 +124,16 @@ const NavBar = () => {
                         component={Link}
                         to={item.path}
                         sx={{
-                          color: 'black !important', // Force black text
+                          color: 'grey !important', // Force grey text
                           '&:visited': {
-                            color: 'black !important', // Force black text for visited links
+                            color: 'grey !important', // Force grey text for visited links
                           },
                         }}
                         onClick={toggleDrawer(false)}
                       >
                         <ListItemText
                           primary={
-                            <Typography align="right" fontWeight="bold"> {/* Make text bold */}
+                            <Typography fontWeight="bold"> {/* Make text bold */}
                               {item.text}
                             </Typography>
                           }

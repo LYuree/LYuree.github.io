@@ -7,7 +7,6 @@ import PageNotFound from './components/PageNotFound/PageNotFound';
 import Footer from './components/Footer/Footer';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './theme';
-import WhyPage from './pages/WhyPage/WhyPage';
 import MethodPage from './pages/MethodPage/MethodPage';
 import InitialTest from './pages/TestPages/TestInitial/TestInitial';
 import ThreeSelectsPage from './pages/TestPages/ThreeSelectsPage.tsx/ThreeSelectsPage';
@@ -34,7 +33,6 @@ function App() {
                         <Route path="/" element={<HomePage/>}></Route>
                         <Route path="/about" element={<AboutPage/>}></Route>
                         <Route path="/method" element={<MethodPage/>}></Route>
-                        <Route path="/why" element={<WhyPage/>}></Route>
                         <Route path="/test_init" element={<InitialTest/>}></Route>
                         <Route path="/test_part1" element={<ThreeSelectsPage/>}></Route>
                         <Route path="/test_part2" element={<AlternativesPage/>}></Route>
