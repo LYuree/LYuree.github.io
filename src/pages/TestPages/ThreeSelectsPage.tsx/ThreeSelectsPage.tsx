@@ -261,15 +261,17 @@ const ThreeSelectsPage: React.FC = () => {
         />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      {(page === questions.length) &&
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
-            sx={{ width: isMobile ? '100%' : 'auto' }}
-            >
-            завершить
-            </Button>}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+          sx={{ 
+            width: isMobile ? '100%' : 'auto',
+            visibility: (page === questions.length) ? 'visible' : 'hidden'
+          }}
+          >
+          завершить
+          </Button>
       </Box>
     </Container>
     </ThemeProvider>

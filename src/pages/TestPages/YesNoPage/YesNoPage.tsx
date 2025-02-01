@@ -157,15 +157,17 @@ const YesNoPage: React.FC = () => {
         />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        {(page === questions.length) &&
-          <Button
+        <Button
             variant="contained"
             color="primary"
             onClick={handleSubmit}
-            sx={{ width: isMobile ? '100%' : 'auto' }}
+            sx={{ 
+              width: isMobile ? '100%' : 'auto',
+              visibility: (page === questions.length) ? 'visible' : 'hidden'
+            }}
             >
             завершить
-            </Button>}
+            </Button>
       </Box>
     </Container>
     </ThemeProvider>
