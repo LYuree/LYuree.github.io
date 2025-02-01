@@ -27,3 +27,8 @@ a:visited {
 .report-abuse-link > span.report-abuse-link {
     color: revert;
 }
+
+.content-section-typography,
+.content-section-typography p {
+    text-align: justify;
+}

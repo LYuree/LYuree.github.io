@@ -15,15 +15,16 @@ const ContentSection: React.FC<ContentSectionProps> = ({ title, content }) => {
         bgcolor: 'background.paper',
         borderRadius: 2,
         boxShadow: 1,
+        textAlign: 'justify'
       }}
     >
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{textAlign: 'initial'}}>
         {title}
       </Typography>
       {content.map((item, index) => (
         <React.Fragment key={index}>
           {typeof item === 'string' ? (
-            <Typography paragraph>{item}</Typography>
+            <Typography className='content-section-typography' paragraph>{item}</Typography>
           ) : (
             item // Если это компонент, просто рендерим его
           )}
