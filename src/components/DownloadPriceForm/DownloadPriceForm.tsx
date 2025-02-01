@@ -39,8 +39,8 @@ const DownloadPriceForm: React.FC = () => {
       </Button>
 
       <Box sx={{ mt: 2, textAlign: 'center' }}>
-        <Link href="#" variant="body2" onClick={() => console.log('Сообщить о нарушении')}>
-          Сообщить о нарушении
+        <Link href="#" className="report-abuse-link" variant="body2" onClick={() => console.log('Сообщить о нарушении')}>
+          <span className="report-abuse-link">Сообщить о нарушении</span>
         </Link>
       </Box>
     </Box>

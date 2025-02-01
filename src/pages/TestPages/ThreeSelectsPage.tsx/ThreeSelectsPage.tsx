@@ -13,6 +13,8 @@ import {
   useMediaQuery,
   Pagination,
   PaginationItem,
+  CssBaseline,
+  ThemeProvider,
 } from '@mui/material';
 
 interface Question {
@@ -156,7 +158,9 @@ const ThreeSelectsPage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="md">
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Container maxWidth="md" sx={{pt: '4rem', pb: '2rem'}}>
       <Typography variant="h4" align="center" gutterBottom>
         Career Guidance
       </Typography>
@@ -257,16 +261,19 @@ const ThreeSelectsPage: React.FC = () => {
         />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-          sx={{ width: isMobile ? '100%' : 'auto' }}
-        >
-          Submit
-        </Button>
+      {(page === questions.length) &&
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            sx={{ width: isMobile ? '100%' : 'auto' }}
+            >
+            завершить
+            </Button>}
       </Box>
     </Container>
+    </ThemeProvider>
+
   );
 };
 

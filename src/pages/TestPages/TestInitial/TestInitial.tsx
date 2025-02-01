@@ -19,7 +19,7 @@ const InitialTest: React.FC = () => {
               <div data-name="intro">На нашем сайте вы можете пройти комплексное онлайн тестирование, направленное на определение ваших профессиональных предпочтений. Тест будет интересен школьникам и студентам, он поможет в дальнейшем выборе профессии.
               Наш тест основывается на проверенных методиках, но вместе с этим исследует предпочтения к современным профессиям и направлениям - менеджмент, IT, фриланс и т.д.</div>,
                 <Box my={4} display="flex" justifyContent="center">
-                <Button variant="contained" color="secondary">
+                <Button variant="contained" color="primary">
                   <Link to="/test_part1" style={{color:'white'}}>начать тестирование!</Link>
                 </Button>
             </Box>

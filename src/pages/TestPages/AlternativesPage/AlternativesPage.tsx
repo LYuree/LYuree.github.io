@@ -11,6 +11,8 @@ import {
   useMediaQuery,
   Pagination,
   PaginationItem,
+  ThemeProvider,
+  CssBaseline,
 } from '@mui/material';
 
 interface Question {
@@ -84,7 +86,9 @@ const AlternativesPage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="md">
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Container maxWidth="md" sx={{pt: '4rem', pb: '2rem'}}>
       <Typography variant="h4" align="center" gutterBottom>
         Career Guidance
       </Typography>
@@ -153,16 +157,19 @@ const AlternativesPage: React.FC = () => {
         />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-          sx={{ width: isMobile ? '100%' : 'auto' }}
-        >
-          Submit
-        </Button>
+      {(page === questions.length) &&
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            sx={{ width: isMobile ? '100%' : 'auto' }}
+            >
+            завершить
+            </Button>}
       </Box>
     </Container>
+    </ThemeProvider>
+
   );
 };
 

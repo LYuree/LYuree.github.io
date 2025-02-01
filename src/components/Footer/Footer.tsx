@@ -16,7 +16,7 @@ const Footer = () => {
         bgcolor: 'primary.main', 
         color: 'white', 
         py: 4, 
-        mt: 4 
+        mt: 4,
       }}
     >
       <Container maxWidth="md">

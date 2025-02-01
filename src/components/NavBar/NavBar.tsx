@@ -18,7 +18,7 @@ const NavBar = () => {
     <AppBar position="static" color="primary">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Профориентация
+          <Link to="/">Профориентация</Link>
         </Typography>
 
         {!isMobile && (
