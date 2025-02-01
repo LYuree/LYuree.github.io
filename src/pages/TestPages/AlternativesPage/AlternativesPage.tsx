@@ -89,10 +89,10 @@ const AlternativesPage: React.FC = () => {
   };
 
   // Handle submit
-  const handleSubmit = () => {
-    console.log('Selected Answers:', selectedAnswers);
-    // Add your submit logic here
-  };
+  // const handleSubmit = () => {
+  //   console.log('Selected Answers:', selectedAnswers);
+  //   // Add your submit logic here
+  // };
 
   // Handle popup close
   const handlePopupClose = () => {
@@ -195,12 +195,13 @@ const AlternativesPage: React.FC = () => {
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4  }}>
         <Link to="/test_part1">
             <Button
+              disabled={page !== 1 ? true : false}
               variant="contained"
               color="primary"
               // onClick={handleSubmit}
               sx={{
                 width: isMobile ? '100%' : 'auto',
-                visibility: page === 1 ? 'visible' : 'hidden',
+                // visibility: page === 1 ? 'visible' : 'hidden',
               }}
             >
               часть 1

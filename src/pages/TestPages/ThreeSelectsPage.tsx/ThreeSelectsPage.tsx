@@ -119,10 +119,10 @@ const ThreeSelectsPage: React.FC = () => {
   };
 
   // Handle submit
-  const handleSubmit = () => {
-    console.log('Selected Options:', selectedOptions);
-    // Add your submit logic here
-  };
+  // const handleSubmit = () => {
+  //   console.log('Selected Options:', selectedOptions);
+  //   // Add your submit logic here
+  // };
 
   // Handle popup close
   const handlePopupClose = () => {
