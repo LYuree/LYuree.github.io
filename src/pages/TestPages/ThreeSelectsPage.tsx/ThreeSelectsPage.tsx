@@ -23,6 +23,12 @@ interface Question {
   options3: string[];
 }
 
+interface SelectedOptions {
+  select1: string;
+  select2: string;
+  select3: string;
+}
+
 const ThreeSelectsPage: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -33,73 +39,71 @@ const ThreeSelectsPage: React.FC = () => {
   // State for questions
   const [questions, setQuestions] = useState<Question[]>([]);
 
-  // State for select values
-  const [select1, setSelect1] = useState<string>('');
-  const [select2, setSelect2] = useState<string>('');
-  const [select3, setSelect3] = useState<string>('');
+  // State for selected options (key: question ID, value: selected options)
+  const [selectedOptions, setSelectedOptions] = useState<{ [key: number]: SelectedOptions }>({});
 
   // Simulate fetching questions on component mount
   useEffect(() => {
     // Replace this with an actual API call or data fetching logic
     const fetchedQuestions: Question[] = [
-      {
-        id: 1,
-        text: 'What is your primary career interest?',
-        options1: ['Technology', 'Healthcare', 'Finance', 'Education'],
-        options2: ['Entry Level', 'Mid Level', 'Senior Level', 'Executive'],
-        options3: ['Full-time', 'Part-time', 'Freelance'],
-      },
-      {
-        id: 2,
-        text: 'What skills do you want to develop?',
-        options1: ['Coding', 'Design', 'Management', 'Communication'],
-        options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-        options3: ['Online', 'In-person', 'Hybrid'],
-      },
-      {
-        id: 3,
-        text: 'What skills do you want to develop?',
-        options1: ['Coding', 'Design', 'Management', 'Communication'],
-        options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-        options3: ['Online', 'In-person', 'Hybrid'],
-      },
-      {
-        id: 4,
-        text: 'What skills do you want to develop?',
-        options1: ['Coding', 'Design', 'Management', 'Communication'],
-        options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-        options3: ['Online', 'In-person', 'Hybrid'],
-      },
-      {
-        id: 5,
-        text: 'What skills do you want to develop?',
-        options1: ['Coding', 'Design', 'Management', 'Communication'],
-        options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-        options3: ['Online', 'In-person', 'Hybrid'],
-      },
-      {
-        id: 6,
-        text: 'What skills do you want to develop?',
-        options1: ['Coding', 'Design', 'Management', 'Communication'],
-        options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-        options3: ['Online', 'In-person', 'Hybrid'],
-      },
-      {
-        id: 7,
-        text: 'What skills do you want to develop?',
-        options1: ['Coding', 'Design', 'Management', 'Communication'],
-        options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-        options3: ['Online', 'In-person', 'Hybrid'],
-      },
-      {
-        id: 8,
-        text: 'What skills do you want to develop?',
-        options1: ['Coding', 'Design', 'Management', 'Communication'],
-        options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
-        options3: ['Online', 'In-person', 'Hybrid'],
-      },
-      // Add more questions as needed
-    ];
+        {
+          id: 1,
+          text: 'What is your primary career interest?',
+          options1: ['Technology', 'Healthcare', 'Finance', 'Education'],
+          options2: ['Entry Level', 'Mid Level', 'Senior Level', 'Executive'],
+          options3: ['Full-time', 'Part-time', 'Freelance'],
+        },
+        {
+          id: 2,
+          text: 'What skills do you want to develop?',
+          options1: ['Coding', 'Design', 'Management', 'Communication'],
+          options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+          options3: ['Online', 'In-person', 'Hybrid'],
+        },
+        {
+          id: 3,
+          text: 'What skills do you want to develop?',
+          options1: ['Coding', 'Design', 'Management', 'Communication'],
+          options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+          options3: ['Online', 'In-person', 'Hybrid'],
+        },
+        {
+          id: 4,
+          text: 'What skills do you want to develop?',
+          options1: ['Coding', 'Design', 'Management', 'Communication'],
+          options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+          options3: ['Online', 'In-person', 'Hybrid'],
+        },
+        {
+          id: 5,
+          text: 'What skills do you want to develop?',
+          options1: ['Coding', 'Design', 'Management', 'Communication'],
+          options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+          options3: ['Online', 'In-person', 'Hybrid'],
+        },
+        {
+          id: 6,
+          text: 'What skills do you want to develop?',
+          options1: ['Coding', 'Design', 'Management', 'Communication'],
+          options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+          options3: ['Online', 'In-person', 'Hybrid'],
+        },
+        {
+          id: 7,
+          text: 'What skills do you want to develop?',
+          options1: ['Coding', 'Design', 'Management', 'Communication'],
+          options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+          options3: ['Online', 'In-person', 'Hybrid'],
+        },
+        {
+          id: 8,
+          text: 'What skills do you want to develop?',
+          options1: ['Coding', 'Design', 'Management', 'Communication'],
+          options2: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+          options3: ['Online', 'In-person', 'Hybrid'],
+        },
+        // Add more questions as needed
+      ];
     setQuestions(fetchedQuestions);
   }, []);
 
@@ -108,15 +112,36 @@ const ThreeSelectsPage: React.FC = () => {
 
   // Handle select changes
   const handleSelect1Change = (event: SelectChangeEvent) => {
-    setSelect1(event.target.value as string);
+    const value = event.target.value as string;
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [currentQuestion.id]: {
+        ...prevOptions[currentQuestion.id],
+        select1: value,
+      },
+    }));
   };
 
   const handleSelect2Change = (event: SelectChangeEvent) => {
-    setSelect2(event.target.value as string);
+    const value = event.target.value as string;
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [currentQuestion.id]: {
+        ...prevOptions[currentQuestion.id],
+        select2: value,
+      },
+    }));
   };
 
   const handleSelect3Change = (event: SelectChangeEvent) => {
-    setSelect3(event.target.value as string);
+    const value = event.target.value as string;
+    setSelectedOptions((prevOptions) => ({
+      ...prevOptions,
+      [currentQuestion.id]: {
+        ...prevOptions[currentQuestion.id],
+        select3: value,
+      },
+    }));
   };
 
   // Handle page change
@@ -126,7 +151,7 @@ const ThreeSelectsPage: React.FC = () => {
 
   // Handle submit
   const handleSubmit = () => {
-    console.log('Selected Values:', { select1, select2, select3 });
+    console.log('Selected Options:', selectedOptions);
     // Add your submit logic here
   };
 
@@ -155,7 +180,7 @@ const ThreeSelectsPage: React.FC = () => {
               <Select
                 labelId="select1-label"
                 id="select1"
-                value={select1}
+                value={selectedOptions[currentQuestion.id]?.select1 || ''}
                 label="Option 1"
                 onChange={handleSelect1Change}
               >
@@ -171,7 +196,7 @@ const ThreeSelectsPage: React.FC = () => {
               <Select
                 labelId="select2-label"
                 id="select2"
-                value={select2}
+                value={selectedOptions[currentQuestion.id]?.select2 || ''}
                 label="Option 2"
                 onChange={handleSelect2Change}
               >
@@ -187,7 +212,7 @@ const ThreeSelectsPage: React.FC = () => {
               <Select
                 labelId="select3-label"
                 id="select3"
-                value={select3}
+                value={selectedOptions[currentQuestion.id]?.select3 || ''}
                 label="Option 3"
                 onChange={handleSelect3Change}
               >

@@ -12,6 +12,7 @@ import WhyPage from './pages/WhyPage/WhyPage';
 import MethodPage from './pages/MethodPage/MethodPage';
 import InitialTest from './pages/TestPages/TestInitial/TestInitial';
 import ThreeSelectsPage from './pages/TestPages/ThreeSelectsPage.tsx/ThreeSelectsPage';
+import AlternativesPage from './pages/TestPages/AlternativesPage/AlternativesPage';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/why" element={<WhyPage/>}></Route>
                     <Route path="/test_init" element={<InitialTest/>}></Route>
                     <Route path="/test_part1" element={<ThreeSelectsPage/>}></Route>
+                    <Route path="/test_part2" element={<AlternativesPage/>}></Route>
                     <Route path="*" element={<PageNotFound/>}></Route>
                 </Routes>
                 <Footer/>
