@@ -15,16 +15,21 @@ const ContentSection: React.FC<ContentSectionProps> = ({ title, content }) => {
         bgcolor: 'background.paper',
         borderRadius: 2,
         boxShadow: 1,
-        textAlign: 'justify'
+        textAlign: 'justify',
       }}
     >
-      <Typography variant="h4" gutterBottom sx={{textAlign: 'initial'}}>
+      <Typography variant="h4" gutterBottom sx={{ textAlign: 'initial' }}>
         {title}
       </Typography>
       {content.map((item, index) => (
         <React.Fragment key={index}>
           {typeof item === 'string' ? (
-            <Typography className='content-section-typography' paragraph>{item}</Typography>
+            <Typography
+              className="content-section-typography"
+              sx={{ mb: 2 }} // Add bottom margin to simulate paragraph spacing
+            >
+              {item}
+            </Typography>
           ) : (
             item // Если это компонент, просто рендерим его
           )}
