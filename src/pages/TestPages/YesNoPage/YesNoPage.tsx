@@ -51,6 +51,12 @@ const YesNoPage: React.FC = () => {
   // State for showing error messages
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (!location.state?.part1Answers || !location.state?.part2Answers) {
+      navigate('/test_init');
+    }
+  }, [location.state, navigate]);
+
   // Simulate fetching questions on component mount
   useEffect(() => {
     // Replace this with an actual API call or data fetching logic

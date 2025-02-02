@@ -3,10 +3,17 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../../theme";
 import ContentSection from "../../components/ContentSection/ContentSection";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const ResultsPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    if (!location.state?.part1Answers || !location.state?.part2Answers || !location.state?.part3Answers) {
+      navigate('/test_init');
+    }
+  }, [location.state, navigate]);
 
   // Access the state passed from the previous pages
   const { part1Answers, part2Answers, part3Answers } = location.state || {};
