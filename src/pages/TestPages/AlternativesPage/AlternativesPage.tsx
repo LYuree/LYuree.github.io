@@ -11,15 +11,17 @@ import {
   useMediaQuery,
   Pagination,
   PaginationItem,
-  ThemeProvider,
   CssBaseline,
+  ThemeProvider,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
+  Snackbar,
+  Alert,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface Question {
   id: number;
@@ -30,6 +32,8 @@ interface Question {
 
 const AlternativesPage: React.FC = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // State for page number
@@ -43,6 +47,9 @@ const AlternativesPage: React.FC = () => {
 
   // State for controlling the popup
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(true);
+
+  // State for showing error messages
+  const [error, setError] = useState<string | null>(null);
 
   // Simulate fetching questions on component mount
   useEffect(() => {
@@ -83,20 +90,59 @@ const AlternativesPage: React.FC = () => {
     }));
   };
 
+  // Validate if the current question is answered
+  const isCurrentQuestionAnswered = () => {
+    if (!currentQuestion) return false; // Check if currentQuestion is defined
+    return !!selectedAnswers[currentQuestion.id]; // Check if the current question has an answer
+  };
+
   // Handle page change
   const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
+    if (!isCurrentQuestionAnswered()) {
+      setError('Пожалуйста, ответьте на текущий вопрос перед переходом на другую страницу.');
+      return;
+    }
     setPage(value);
   };
 
+  // Handle next page
+  const handleNextPage = () => {
+    if (!isCurrentQuestionAnswered()) {
+      setError('Пожалуйста, ответьте на текущий вопрос перед переходом на следующую страницу.');
+      return;
+    }
+    if (page < questions.length) {
+      setPage(page + 1);
+    } else {
+      handleSubmit();
+    }
+  };
+
+  // Handle previous page
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
   // Handle submit
-  // const handleSubmit = () => {
-  //   console.log('Selected Answers:', selectedAnswers);
-  //   // Add your submit logic here
-  // };
+  const handleSubmit = () => {
+    if (!isCurrentQuestionAnswered()) {
+      setError('Пожалуйста, ответьте на текущий вопрос перед завершением.');
+      return;
+    }
+    console.log('Selected Answers:', selectedAnswers);
+    navigate("/test_part3", { state: { part2Answers: selectedAnswers, part1Answers: location.state?.part1Answers } });
+  };
 
   // Handle popup close
   const handlePopupClose = () => {
     setIsPopupOpen(false);
+  };
+
+  // Close error message
+  const handleCloseError = () => {
+    setError(null);
   };
 
   return (
@@ -124,6 +170,17 @@ const AlternativesPage: React.FC = () => {
             </Button>
           </DialogActions>
         </Dialog>
+
+        {/* Error Snackbar */}
+        <Snackbar
+          open={!!error}
+          autoHideDuration={6000}
+          onClose={handleCloseError}
+        >
+          <Alert onClose={handleCloseError} severity="error" sx={{ width: '100%' }}>
+            {error}
+          </Alert>
+        </Snackbar>
 
         <Typography variant="h4" align="center" gutterBottom>
           Career Guidance
@@ -192,35 +249,29 @@ const AlternativesPage: React.FC = () => {
             }}
           />
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4  }}>
-        <Link to="/test_part1">
-            <Button
-              disabled={page !== 1 ? true : false}
-              variant="contained"
-              color="primary"
-              // onClick={handleSubmit}
-              sx={{
-                width: isMobile ? '100%' : 'auto',
-                // visibility: page === 1 ? 'visible' : 'hidden',
-              }}
-            >
-              часть 1
-            </Button>
-          </Link>
-          <Link to={page === questions.length ? "/test_part3" : "#"}>
-            <Button
-              disabled={page !== questions.length}
-              variant="contained"
-              color="primary"
-              // onClick={handleSubmit}
-              sx={{
-                width: isMobile ? '100%' : 'auto',
-                // visibility: page === questions.length ? 'visible' : 'hidden',
-              }}
-            >
-              часть 3
-            </Button>
-          </Link>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+          <Button
+            disabled={page === 1}
+            variant="contained"
+            color="secondary"
+            onClick={handlePreviousPage}
+            sx={{
+              width: isMobile ? '100%' : 'auto',
+            }}
+          >
+            Назад
+          </Button>
+          <Button
+            disabled={!isCurrentQuestionAnswered()}
+            variant="contained"
+            color="primary"
+            onClick={handleNextPage}
+            sx={{
+              width: isMobile ? '100%' : 'auto',
+            }}
+          >
+            {page === questions.length ? 'Завершить' : 'Далее'}
+          </Button>
         </Box>
       </Container>
     </ThemeProvider>

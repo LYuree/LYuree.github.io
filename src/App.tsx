@@ -13,6 +13,7 @@ import ThreeSelectsPage from './pages/TestPages/ThreeSelectsPage.tsx/ThreeSelect
 import AlternativesPage from './pages/TestPages/AlternativesPage/AlternativesPage';
 import YesNoPage from './pages/TestPages/YesNoPage/YesNoPage';
 import { Box } from "@mui/material";
+import ResultsPage from "./pages/ResultsPage/ResultsPage";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                         <Route path="/test_part1" element={<ThreeSelectsPage/>}></Route>
                         <Route path="/test_part2" element={<AlternativesPage/>}></Route>
                         <Route path="/test_part3" element={<YesNoPage/>}></Route>
+                        <Route path="/results" element={<ResultsPage/>}></Route>
                         <Route path="*" element={<PageNotFound/>}></Route>
                     </Routes>
                   </Box>

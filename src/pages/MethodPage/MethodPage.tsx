@@ -100,10 +100,10 @@ const MethodPage: React.FC = () => {
                   <p><strong>Человек-знак</strong> — шкала оценивает желание субъекта заниматься той или иной деятельностью.</p>,
                   <p><strong>Человек — художественный образ</strong> — шкала оценивает желание субъекта заниматься той или иной деятельностью.</p>,
                   <Box mb={4} mt={8} display="flex" justifyContent="center">
-                  <Button color="secondary" variant="contained">
-                    <Link to="/test_init">пройти тестирование!</Link>
+                    <Button color="secondary" variant="contained">
+                      <Link to="/test_init">пройти тестирование!</Link>
                     </Button>
-                    </Box>
+                  </Box>
                 ]}
               />
           </div>

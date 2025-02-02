@@ -6,6 +6,7 @@ import DownloadPriceForm from "../../components/DownloadPriceForm/DownloadPriceF
 import ContentList from "../../components/ContentList/ContentList";
 import HeroSection from "../../components/HeroSection/HeroSection";
 import image from "../../images/collage-different-photos-concept-different-occupation.jpg"
+import { Link } from "react-router-dom";
 const HomePage: React.FC = () => {
     const handleButtonClick = (scrollToDataName: string) => {
         if (scrollToDataName) {
@@ -99,7 +100,12 @@ const HomePage: React.FC = () => {
                   <Box sx={{fontWeight: 'bold', my: '2rem', fontSize: '2em'}}>*придумать броский заголовок🔎*</Box>,
                   `На следующем этапе, нужно познакомится с этими профессия подробнее и выбрать ту от которой получаешь максимальное удовлетворение. И в которой имеешь максимальный потенциал, максимальное преимущество перед другими претендентами (опыт, физическую силу, музыкальный слух и т.д.).`,
                   `Такой подход позволит максимально реализовать себя в будущей профессии, и в условиях жёсткой конференции занять достойное место.`,
-                ]}
+                    <Box mb={4} mt={8} display="flex" justifyContent="center">
+                      <Button color="secondary" variant="contained">
+                        <Link to="/test_init">пройти тестирование!</Link>
+                      </Button>
+                    </Box>
+                  ]}
               />
           </div>
         </Box>

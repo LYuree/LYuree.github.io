@@ -20,8 +20,10 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  Snackbar,
+  Alert,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Question {
   id: number;
@@ -39,6 +41,7 @@ interface SelectedOptions {
 
 const ThreeSelectsPage: React.FC = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // State for page number
@@ -52,6 +55,9 @@ const ThreeSelectsPage: React.FC = () => {
 
   // State for controlling the popup
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(true);
+
+  // State for showing error messages
+  const [error, setError] = useState<string | null>(null);
 
   // Simulate fetching questions on component mount
   useEffect(() => {
@@ -113,20 +119,62 @@ const ThreeSelectsPage: React.FC = () => {
     }));
   };
 
+  // Validate if the current question is answered
+  const isCurrentQuestionAnswered = () => {
+    if (!currentQuestion) return false; // Check if currentQuestion is defined
+    const currentAnswer = selectedOptions[currentQuestion.id];
+    return (
+      currentAnswer?.select1 && currentAnswer?.select2 && currentAnswer?.select3
+    );
+  };
+
   // Handle page change
   const handlePageChange = (_: React.ChangeEvent<unknown>, value: number) => {
+    if (!isCurrentQuestionAnswered()) {
+      setError('Пожалуйста, ответьте на текущий вопрос перед переходом на другую страницу.');
+      return;
+    }
     setPage(value);
   };
 
+  // Handle next page
+  const handleNextPage = () => {
+    if (!isCurrentQuestionAnswered()) {
+      setError('Пожалуйста, ответьте на текущий вопрос перед переходом на следующую страницу.');
+      return;
+    }
+    if (page < questions.length) {
+      setPage(page + 1);
+    } else {
+      handleSubmit();
+    }
+  };
+
+  // Handle previous page
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
   // Handle submit
-  // const handleSubmit = () => {
-  //   console.log('Selected Options:', selectedOptions);
-  //   // Add your submit logic here
-  // };
+  const handleSubmit = () => {
+    if (!isCurrentQuestionAnswered()) {
+      setError('Пожалуйста, ответьте на текущий вопрос перед завершением.');
+      return;
+    }
+    console.log('Selected Options:', selectedOptions);
+    navigate("/test_part2", { state: { part1Answers: selectedOptions } });
+  };
 
   // Handle popup close
   const handlePopupClose = () => {
     setIsPopupOpen(false);
+  };
+
+  // Close error message
+  const handleCloseError = () => {
+    setError(null);
   };
 
   return (
@@ -145,32 +193,8 @@ const ThreeSelectsPage: React.FC = () => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="popup-description">
-            Внимательно прочитайте инструкцию по работе с опросником. Внимательно прочитайте каждое высказывание. На него Вы должны дать 3 ответа:
-            <br /><br />
-            <div>1. Насколько хорошо Вы умеете делать то, что написано в вопросе:</div>
-            <ul>
-              <li>делаю, как правило, хорошо</li>
-              <li>делаю средне</li>
-              <li>делаю плохо, совсем не умею</li>
-            </ul>
-            2.Какие ощущения возникали у Вас, когда Вы это делали:
-            <ul>
-              <li>положительные (приятно, интересно, легко)</li>
-              <li>нейтральные (всё равно)</li>
-              <li>отрицательные (неприятно, неинтересно, трудно)</li>
-            </ul>
-            3.Хотели бы Вы, чтобы описанное в вопросе действие было включено в Вашу будущую работу:
-            <ul>
-              <li>да</li>
-              <li>всё равно</li>
-              <li>нет</li>
-            </ul>
-            В каждом вопросе Вы оцениваете сначала Ваше умение, затем отношение и затем желание.
-            Если Вы никогда не делали того, что написано в вопросе, то вместо оценки выберите "не имел дела" в первых двух вопросах и попробуйте ответить только на третий вопрос.
-            Читая вопрос, обязательно обращайте внимание на слова часто, легко, систематически и т.д. Ваш ответ должен учитывать смысл этих слов. Если из перечисленных в вопросе нескольких действий Вы умеете делать что-то одно, то именно его Вы и оцениваете тремя оценками. Работайте внимательно, не спешите!
-            1. отвечать хорошо умею делать,можно только в том случае, если Вы это делали не один раз, а много раз, и у Вас, как правило, это хорошо получалось.
-            2. Ставить оценку в умениях в надо и когда Вы что-то делает плохо, и когда Вы не умеет это делать ( т.е. пробовал, но не получалось);            
-  </DialogContentText>
+              Внимательно прочитайте инструкцию по работе с опросником...
+            </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={handlePopupClose} color="primary" variant="contained">
@@ -178,6 +202,17 @@ const ThreeSelectsPage: React.FC = () => {
             </Button>
           </DialogActions>
         </Dialog>
+
+        {/* Error Snackbar */}
+        <Snackbar
+          open={!!error}
+          autoHideDuration={6000}
+          onClose={handleCloseError}
+        >
+          <Alert onClose={handleCloseError} severity="error" sx={{ width: '100%' }}>
+            {error}
+          </Alert>
+        </Snackbar>
 
         <Typography variant="h4" align="center" gutterBottom>
           Career Guidance
@@ -278,20 +313,29 @@ const ThreeSelectsPage: React.FC = () => {
             }}
           />
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Link to="/test_part2">
-            <Button
-              variant="contained"
-              color="primary"
-              // onClick={handleSubmit}
-              sx={{
-                width: isMobile ? '100%' : 'auto',
-                visibility: page === questions.length ? 'visible' : 'hidden',
-              }}
-            >
-              часть 2
-            </Button>
-          </Link>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+          <Button
+            disabled={page === 1}
+            variant="contained"
+            color="secondary"
+            onClick={handlePreviousPage}
+            sx={{
+              width: isMobile ? '100%' : 'auto',
+            }}
+          >
+            Назад
+          </Button>
+          <Button
+            disabled={!isCurrentQuestionAnswered()}
+            variant="contained"
+            color="primary"
+            onClick={handleNextPage}
+            sx={{
+              width: isMobile ? '100%' : 'auto',
+            }}
+          >
+            {page === questions.length ? 'Завершить' : 'Далее'}
+          </Button>
         </Box>
       </Container>
     </ThemeProvider>
