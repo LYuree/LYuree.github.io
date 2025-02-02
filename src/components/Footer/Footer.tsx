@@ -6,7 +6,9 @@
 //     </footer> );
 // }
 
-import { Box, Typography, Link, Container } from '@mui/material';
+import { Box, Typography, Container } from '@mui/material';
+import { Link } from 'react-router-dom';
+
 
 const Footer = () => {
   return (
@@ -28,8 +30,8 @@ const Footer = () => {
           
           <Box mb={2}>
             <Typography variant="h6">Ссылки</Typography>
-            <Link href="/method" color="inherit">Методика</Link><br />
-            <Link href="/test_init" color="inherit">Тестирование</Link>
+            <Link to="/method" color="inherit">Методика</Link><br />
+            <Link to="/test_init" color="inherit">Тестирование</Link>
           </Box>
         </Box>
         
