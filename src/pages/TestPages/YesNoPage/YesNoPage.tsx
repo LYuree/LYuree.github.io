@@ -263,7 +263,7 @@ const YesNoPage: React.FC = () => {
           <Button
             disabled={page === 1}
             variant="contained"
-            color="secondary"
+            color="primary"
             onClick={handlePreviousPage}
             sx={{
               width: isMobile ? '100%' : 'auto',
