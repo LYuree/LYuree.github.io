@@ -65,10 +65,10 @@ const ThreeSelectsPage: React.FC = () => {
     const fetchedQuestions: Question[] = [
       {
         id: 1,
-        text: 'What is your primary career interest?',
-        options1: ['Technology', 'Healthcare', 'Finance', 'Education'],
-        options2: ['Entry Level', 'Mid Level', 'Senior Level', 'Executive'],
-        options3: ['Full-time', 'Part-time', 'Freelance'],
+        text: 'Анализировать содержание научных, учебных, художественных текстов, выделять главное, делать обобщения, выводы.?',
+        options1: ['делаю, как правило, хорошо', 'делаю средне', 'делаю плохо, совсем не умею', 'не имел дела'],
+        options2: ['положительные (приятно, интересно, легко)', 'нейтральные (все равно)', ' отрицательные (неприятно, неинтересно, трудно)', 'не имел дела'],
+        options3: ['да', 'нет', 'всё равно'],
       },
       {
         id: 2,
@@ -241,11 +241,11 @@ const ThreeSelectsPage: React.FC = () => {
         </Snackbar>
 
         <Typography variant="h4" align="center" gutterBottom>
-          Career Guidance
+          Первый тест опросника
         </Typography>
         {currentQuestion && (
           <>
-            <Typography variant="h6" align="center" gutterBottom>
+            <Typography variant="h6" align="center" gutterBottom sx={{marginTop: 2}}>
               {currentQuestion.text}
             </Typography>
             <Box
@@ -255,16 +255,16 @@ const ThreeSelectsPage: React.FC = () => {
                 gap: 2,
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: 4,
+                marginY: 4,
               }}
             >
               <FormControl fullWidth={isMobile} sx={{ minWidth: 200 }}>
-                <InputLabel id="select1-label">Option 1</InputLabel>
+                <InputLabel id="select1-label">Умение</InputLabel>
                 <Select
                   labelId="select1-label"
                   id="select1"
                   value={selectedOptions[currentQuestion.id]?.select1 || ''}
-                  label="Option 1"
+                  label="Умение"
                   onChange={handleSelect1Change}
                 >
                   {currentQuestion.options1.map((option, index) => (
@@ -275,12 +275,12 @@ const ThreeSelectsPage: React.FC = () => {
                 </Select>
               </FormControl>
               <FormControl fullWidth={isMobile} sx={{ minWidth: 200 }}>
-                <InputLabel id="select2-label">Option 2</InputLabel>
+                <InputLabel id="select2-label">Желание</InputLabel>
                 <Select
                   labelId="select2-label"
                   id="select2"
                   value={selectedOptions[currentQuestion.id]?.select2 || ''}
-                  label="Option 2"
+                  label="Желание"
                   onChange={handleSelect2Change}
                 >
                   {currentQuestion.options2.map((option, index) => (
@@ -291,12 +291,12 @@ const ThreeSelectsPage: React.FC = () => {
                 </Select>
               </FormControl>
               <FormControl fullWidth={isMobile} sx={{ minWidth: 200 }}>
-                <InputLabel id="select3-label">Option 3</InputLabel>
+                <InputLabel id="select3-label">Отношение</InputLabel>
                 <Select
                   labelId="select3-label"
                   id="select3"
                   value={selectedOptions[currentQuestion.id]?.select3 || ''}
-                  label="Option 3"
+                  label="Отношение"
                   onChange={handleSelect3Change}
                 >
                   {currentQuestion.options3.map((option, index) => (
